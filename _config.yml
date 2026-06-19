@@ -21,8 +21,8 @@ plugins:
 authors:
     armand:
       name:           Armand
-      site:           https://www.wowthemes.net
-      avatar:         /assets/images/avatar2.jpg
+      site:           ""
+      avatar:         assets/images/author.jpg
       bio:            "Instructeur de voile"
       email:          fakemail@gmail.com
       twitter:        https://twitter.com/wowthemesnet
@@ -36,7 +36,7 @@ defaults:
     values:
       layout: post
       author: armand
-      avatar: /assets/images/avatar1.jpg
+      avatar: assets/images/author.jpg
       
   # all pages
   - scope:
