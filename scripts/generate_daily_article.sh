@@ -90,7 +90,7 @@ cat > "$FILENAME" << EOF
 layout: post
 title:  "${TITLE}"
 author: armand
-categories: [ Unapproved, ${CATEGORY} ]
+categories: [ ${CATEGORY} ]
 image: https://images.unsplash.com/photo-1500627964684-141351970a7f?w=800&q=80
 tags: [ ${CATEGORY}, fun-activity, recherche ]
 ---
@@ -163,7 +163,7 @@ EOF
 echo ""
 echo "✓ Article created: $FILENAME"
 echo "  Title: $TITLE"
-echo "  Categories: [ Unapproved, $CATEGORY ]"
+echo "  Categories: [ $CATEGORY ]"
 echo "  Sujet: $TOPIC  (index $NEXT_INDEX / $NUM_TOPICS)"
 
 # ---------- Git: feature branch + push + PR ----------
@@ -174,15 +174,12 @@ if ! git rev-parse --git-dir >/dev/null 2>&1; then
   exit 0
 fi
 
-# Ensure we're on main and it's up to date
 MAIN_BRANCH="main"
 CURRENT_BRANCH=$(git branch --show-current 2>/dev/null || echo "")
-
-# Save & restore current branch
 ORIGINAL_BRANCH="$CURRENT_BRANCH"
 echo "🌿 Current branch: $CURRENT_BRANCH"
 
-# Stash any working tree changes if needed (defensive)
+# Stash any in-progress changes (defensive)
 STASH_NEEDED=0
 if ! git diff --quiet || ! git diff --cached --quiet; then
   STASH_NEEDED=1
@@ -190,10 +187,10 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
   git stash push -u -m "auto-gen-daily-article stash $(date +%s)" >/dev/null 2>&1 || STASH_NEEDED=0
 fi
 
-# Make sure we're on main and up to date
+# Switch to main and pull
 git checkout "$MAIN_BRANCH" 2>/dev/null || {
-  echo "⚠ Cannot checkout $MAIN_BRANCH — falling back to direct commit."
-  if [[ $STASH_NEEDED -eq 1 ]]; then git stash pop >/dev/null 2>&1 || true; fi
+  echo "⚠ Cannot checkout $MAIN_BRANCH — aborting git workflow."
+  [[ $STASH_NEEDED -eq 1 ]] && git stash pop >/dev/null 2>&1 || true
   exit 0
 }
 
@@ -212,7 +209,6 @@ BRANCH_NAME="auto/daily-article-${TODAY}-$(echo "$SLUG_TOPIC" | cut -c1-30)"
 echo "🌿 Creating branch: $BRANCH_NAME"
 git checkout -b "$BRANCH_NAME" 2>/dev/null || git checkout "$BRANCH_NAME"
 
-# Pop the stash on the new branch if we stashed
 if [[ $STASH_NEEDED -eq 1 ]]; then
   git stash pop >/dev/null 2>&1 || true
 fi
@@ -236,7 +232,6 @@ fi
 echo "✏️ git commit..."
 git commit -m "$COMMIT_MSG"
 
-# Push the branch
 echo "👉 git push $REMOTE $BRANCH_NAME..."
 if ! git push "$REMOTE" "$BRANCH_NAME" 2>&1; then
   echo "✗ Push failed — branch kept local."
@@ -248,8 +243,15 @@ echo "✓ Branch pushed: $REMOTE/$BRANCH_NAME"
 # ---------- Open Pull Request via gh CLI ----------
 PR_URL=""
 if command -v gh >/dev/null 2>&1; then
+  gh label create "auto-generated" \
+       --description "Article generated automatically by the daily cron" \
+       --color "fbca04" >/dev/null 2>&1 || true
+  gh label create "unapproved" \
+       --description "Content awaiting pedagogical review" \
+       --color "e99695" >/dev/null 2>&1 || true
+
   echo "🔀 Creating Pull Request..."
-  PR_BODY=$(cat << EOF
+  PR_BODY=$(cat <<EOF
 ## 🌅 Article quotidien (en attente d'approbation)
 
 **Date :** ${TODAY}
@@ -279,20 +281,16 @@ EOF
       --head "$BRANCH_NAME" \
       --title "📝 Auto: Daily article [${TODAY}] ${SLUG_TOPIC}" \
       --body "$PR_BODY" \
-      --label "auto-generated,unapproved" \
-      2>&1); then
+      --label "auto-generated,unapproved" 2>&1); then
     echo "✓ PR created: $PR_URL"
   else
-    echo "⚠ Could not create PR via gh CLI."
+    echo "⚠ Could not create PR via gh CLI:"
     echo "$PR_URL"
   fi
 else
-  echo "ℹ gh CLI not installed — branch pushed, PR must be created manually:"
-  echo "   https://github.com/$(git config --get remote.$REMOTE.url | sed -E 's|.*github.com[:/]([^/]+)/([^.]+)(\.git)?|\1/\2|')/compare/${MAIN_BRANCH}...${BRANCH_NAME}"
+  echo "ℹ gh CLI not installed — branch pushed, PR must be created manually."
 fi
 
 # Return to original branch
 git checkout "$ORIGINAL_BRANCH" >/dev/null 2>&1 || git checkout "$MAIN_BRANCH"
-echo ""
 echo "↩️ Returned to branch: $(git branch --show-current)"
-
