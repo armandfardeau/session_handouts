@@ -3,3 +3,10 @@ _site
 .jekyll-metadata
 node_modules
 Gemfile.lock
+
+# Local generator scripts & state
+scripts/generate_daily_article.sh
+scripts/gen_article.sh
+scripts/daily_article_v2.sh
+scripts/.last_topic_index
+scripts/topics_pool.json
