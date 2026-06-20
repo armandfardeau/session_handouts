@@ -1,9 +1,9 @@
 ---
-title: "Mundana Free Jekyll Theme"
+title: "Mes fiches séances"
 layout: default
 pagination:
     enabled: true
-description: "A great Jekyll theme developed by Sal @wowthemesnet."
+description: "Fiches de séance de voile légère prêtes à l'emploi. Exercices, parcours pédagogiques et sécurité pour moniteurs de voile (niveaux FFV 1 à 5)."
 ---
 
 
@@ -32,14 +32,14 @@ description: "A great Jekyll theme developed by Sal @wowthemesnet."
     </p>
     <div>
         <small class="d-block text-muted">
-            In <span class="catlist">
+            {{ site.data.i18n.fr.in }} <span class="catlist">
                 {% for category in latest_post.categories %}
-                <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories.html#{{ category | downcase }}">{{ category }}</a><span class="sep">, </span>
+                <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/category/{{ category | downcase | replace: ' ', '-' }}/">{{ category }}</a><span class="sep">, </span>
                 {% endfor %}
                 </span>                   
         </small>
         <small class="text-muted">
-            {{ latest_post.date | date: '%b %d, %Y' }}
+            {{ latest_post.date | date: '%-d %b %Y' }}
         </small>
     </div>
     </div>
@@ -63,14 +63,14 @@ description: "A great Jekyll theme developed by Sal @wowthemesnet."
                     <a class="text-dark" href="{{site.baseurl}}{{second_post.url}}">{{ second_post.title }}</a>
                     </h2>
                     <small class="d-block text-muted">
-                        In <span class="catlist">
+                        {{ site.data.i18n.fr.in }} <span class="catlist">
                         {% for category in second_post.categories %}
-                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories.html#{{ category | downcase }}">{{ category }}</a><span class="sep">, </span>
+                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/category/{{ category | downcase | replace: ' ', '-' }}/">{{ category }}</a><span class="sep">, </span>
                         {% endfor %}
                         </span>                   
                     </small>
                     <small class="text-muted">
-                        {{ second_post.date | date: '%b %d, %Y' }}
+                        {{ second_post.date | date: '%-d %b %Y' }}
                     </small>
                 </div>
             </div>
@@ -90,14 +90,14 @@ description: "A great Jekyll theme developed by Sal @wowthemesnet."
                     <a class="text-dark" href="{{site.baseurl}}{{third_post.url}}">{{ third_post.title }}</a>
                     </h2>
                     <small class="d-block text-muted">
-                        In <span class="catlist">
+                        {{ site.data.i18n.fr.in }} <span class="catlist">
                         {% for category in third_post.categories %}
-                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories.html#{{ category | downcase }}">{{ category }}</a><span class="sep">, </span>
+                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/category/{{ category | downcase | replace: ' ', '-' }}/">{{ category }}</a><span class="sep">, </span>
                         {% endfor %}
                         </span>                   
                     </small>
                     <small class="text-muted">
-                        {{ third_post.date | date: '%b %d, %Y' }}
+                        {{ third_post.date | date: '%-d %b %Y' }}
                     </small>
                 </div>
             </div>
@@ -117,14 +117,14 @@ description: "A great Jekyll theme developed by Sal @wowthemesnet."
                     <a class="text-dark" href="{{site.baseurl}}{{fourth_post.url}}">{{ fourth_post.title }}</a>
                     </h2>
                     <small class="d-block text-muted">
-                        In <span class="catlist">
+                        {{ site.data.i18n.fr.in }} <span class="catlist">
                         {% for category in fourth_post.categories %}
-                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/categories.html#{{ category | downcase }}">{{ category }}</a><span class="sep">, </span>
+                        <a class="text-capitalize text-muted smoothscroll" href="{{site.baseurl}}/category/{{ category | downcase | replace: ' ', '-' }}/">{{ category }}</a><span class="sep">, </span>
                         {% endfor %}
                         </span>                   
                     </small>
                     <small class="text-muted">
-                        {{ fourth_post.date | date: '%b %d, %Y' }}
+                        {{ fourth_post.date | date: '%-d %b %Y' }}
                     </small>
                 </div>
             </div>
@@ -144,7 +144,7 @@ description: "A great Jekyll theme developed by Sal @wowthemesnet."
                 <p class="mb-3 lead">
                     {{ post.excerpt | strip_html | strip_newlines | truncate: 136 }}
                 </p>
-                <a href="{{site.baseurl}}{{post.url}}" class="btn btn-dark">Read More</a>
+                <a href="{{site.baseurl}}{{post.url}}" class="btn btn-dark">{{ site.data.i18n.fr.read_more }}</a>
             </div>
             <div class="col-md-6 d-none d-md-block pr-0" style="background-size:cover;background-image:url({{site.baseurl}}/{{ post.image }});">	
             </div>
@@ -168,7 +168,7 @@ description: "A great Jekyll theme developed by Sal @wowthemesnet."
    
     <div class="col-md-8 main-loop">
         
-        <h4 class="font-weight-bold spanborder"><span>All Stories</span></h4>
+        <h4 class="font-weight-bold spanborder"><span>{{ site.data.i18n.fr.all_stories }}</span></h4>
         
 
         {% for post in paginator.posts %}
@@ -182,9 +182,9 @@ description: "A great Jekyll theme developed by Sal @wowthemesnet."
             {% if paginator.total_pages > 1 %}
             <ul class="pagination"> 
               {% if paginator.previous_page %}
-                <li class="page-item"><a class="page-link" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a></li>
+                <li class="page-item"><a class="page-link" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ site.data.i18n.fr.prev }} &laquo;</a></li>
               {% else %}
-                <li class="page-item disabled"><span class="prev page-link">&laquo;</span></li>
+                <li class="page-item disabled"><span class="prev page-link">{{ site.data.i18n.fr.prev }} &laquo;</span></li>
               {% endif %}
 
               {% for page in (1..paginator.total_pages) %}
@@ -198,9 +198,9 @@ description: "A great Jekyll theme developed by Sal @wowthemesnet."
               {% endfor %}
 
               {% if paginator.next_page %}
-                <li class="page-item"><a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a></li>
+                <li class="page-item"><a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ site.data.i18n.fr.next }} &raquo;</a></li>
               {% else %}
-                <li class="page-item disabled"><span class="next page-link">&raquo;</span></li>
+                <li class="page-item disabled"><span class="next page-link">{{ site.data.i18n.fr.next }} &raquo;</span></li>
               {% endif %}
             </ul>
             {% endif %}      

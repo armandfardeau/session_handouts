@@ -1,4 +1,5 @@
 # Site
+lang: fr
 name: 'Mes fiches séances'
 description: "Trouvez des fiches de séance de voile légère prêtes à l'emploi. Exercices, parcours pédagogiques et sécurité pour moniteurs de voile (niveaux FFV 1 à 5)."
 logo: 'assets/images/logo.png'
@@ -12,20 +13,20 @@ include: ["_pages"]
 permalink: /:title/
 
 # Plugins
-plugins: 
+plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-seo-tag
-  
+
 authors:
     armand:
-      name:           Armand
+      name:           Armand Fardeau
       site:           ""
       avatar:         assets/images/author.jpg
-      bio:            "Instructeur de voile"
+      bio:            "Moniteur de voile FFVoile | Créateur de fiches pédagogiques"
       email:          fakemail@gmail.com
-      twitter:        https://twitter.com/wowthemesnet
+      twitter:        ""
  
 # Defaults
 defaults:

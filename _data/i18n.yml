@@ -1,0 +1,63 @@
+# Centralized French strings.
+# Currently used directly; if you ever add an English version, you can wrap
+# these in a `site.lang` switch and add an `_data/i18n_en.yml` mirror.
+fr:
+  site_name: "Mes fiches séances"
+  site_description: "Trouvez des fiches de séance de voile légère prêtes à l'emploi. Exercices, parcours pédagogiques et sécurité pour moniteurs de voile (niveaux FFV 1 à 5)."
+
+  # Navigation / labels
+  home: "Accueil"
+  categories: "Catégories"
+  tags: "Étiquettes"
+  authors: "Auteurs"
+  contact: "Contact"
+  featured: "À la une"
+
+  # Search
+  search_placeholder: "Tapez un mot-clé puis Entrée…"
+  search_close: "Fermer"
+  search_results_for: "Résultats pour"
+  search_no_results: "Aucun résultat. Fermez et essayez un autre mot-clé !"
+
+  # Common UI
+  in: "Dans"
+  follow: "Suivre"
+  read_more: "Lire la suite"
+  written_by: "Rédigé par"
+  share_this: "Partager cet article"
+  prev: "Précédent"
+  next: "Suivant"
+  posts_one: "fiche"
+  posts_other: "fiches"
+  posts_in_category: "fiches dans cette catégorie."
+  no_posts_in_category: "Aucune fiche dans cette catégorie."
+  all_stories: "Toutes les fiches"
+
+  # Footer
+  copyright_symbol: "©"
+  source_code: "Code source"
+  footer_credit: "Site de fiches pédagogiques pour moniteurs de voile."
+
+  # Comments (Disqus)
+  comments_enable_js: "Activez JavaScript pour voir les commentaires via"
+  comments_powered_by: "Disqus."
+
+  # Newsletter (Mailchimp)
+  newsletter_title: "S'abonner à la newsletter"
+  newsletter_subtitle: "Recevez les dernières fiches directement dans votre boîte mail. Pas de spam !"
+  newsletter_placeholder: "Votre adresse e-mail"
+  newsletter_button: "S'abonner"
+
+  # Contact form
+  contact_intro: "Envoyez votre message à {{site.name}}. Je vous répondrai dès que possible !"
+  contact_name: "Nom *"
+  contact_email: "Adresse e-mail *"
+  contact_message: "Message *"
+  contact_send: "Envoyer"
+
+  # Authors list
+  view_posts: "(Voir les fiches)"
+
+  # 404
+  not_found_title: "Page introuvable :("
+  not_found_text: "La page demandée n'existe pas."

@@ -6,7 +6,7 @@ layout: default
         <div class="col-md-8">
             <!-- Breadcrumb -->
             <p class="text-uppercase font-weight-bold small mb-3">
-                <a class="text-danger" href="{{ site.baseurl }}/categories.html">Categories</a>
+                <a class="text-danger" href="{{ site.baseurl }}/categories.html">{{ site.data.i18n.fr.categories }}</a>
                 <span class="text-muted"> / </span>
                 <span class="text-muted">{{ page.category }}</span>
             </p>
@@ -17,8 +17,8 @@ layout: default
 
             {% assign category_posts = site.posts | where_exp: "post", "post.categories contains page.category" %}
             <p class="text-muted mb-4">
-                {{ category_posts | size }} post{% if category_posts.size != 1 %}s{% endif %}
-                in this category.
+                {{ category_posts | size }} {% if category_posts.size == 1 %}{{ site.data.i18n.fr.posts_one }}{% else %}{{ site.data.i18n.fr.posts_other }}{% endif %}
+                {{ site.data.i18n.fr.posts_in_category }}
             </p>
 
             {% if category_posts.size > 0 %}
@@ -26,7 +26,7 @@ layout: default
                     {% include main-loop-card.html %}
                 {% endfor %}
             {% else %}
-                <p>No posts found in this category.</p>
+                <p>{{ site.data.i18n.fr.no_posts_in_category }}</p>
             {% endif %}
         </div>
 
