@@ -2,7 +2,7 @@
 layout: post
 title:  "Niveau 4 - Adapter les réglages en fonction de l’allure et des conditions de vent et de mer pour faciliter le pilotage"
 author: armand
-categories: [ Dériveur, Niveau 4, Réglages ]
+categories: [ Dériveur, Niveau-4, Réglages ]
 image: https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80
 tags: []
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Niveau 4 - Virer de bord et empanner en maîtrisant l’angle de sortie"
 author: armand
-categories: [ Dériveur, Niveau 4, Manœuvre ]
+categories: [ Dériveur, Niveau-4, Manœuvre ]
 image: https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800&q=80
 tags: []
 ---

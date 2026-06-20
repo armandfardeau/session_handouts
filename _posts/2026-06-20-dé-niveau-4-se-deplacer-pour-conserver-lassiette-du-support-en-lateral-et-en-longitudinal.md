@@ -2,7 +2,7 @@
 layout: post
 title:  "Niveau 4 - Se déplacer pour conserver l’assiette du support en latéral et en longitudinal"
 author: armand
-categories: [ Dériveur, Niveau 4, Équilibre ]
+categories: [ Dériveur, Niveau-4, Équilibre ]
 image: https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=800&q=80
 tags: []
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Niveau 4 - Coordonner les actions de barre et d’écoute pour équilibrer le bateau sans changer d’allure"
 author: armand
-categories: [ Dériveur, Niveau 4, Pilotage ]
+categories: [ Dériveur, Niveau-4, Pilotage ]
 image: https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80
 tags: []
 ---
