@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Activité fun et conviviale — Joute nautique轻柔 : duel amical entre deux supports"
+title:  "Activité fun et conviviale — Relais en flotte : course par équipes sur catamaran"
 author: armand
 categories: [ Croisière ]
 image: https://images.unsplash.com/photo-1500627964684-141351970a7f?w=800&q=80
@@ -11,9 +11,9 @@ tags: [ Croisière, fun-activity, recherche ]
 
 **Status :** 🔴 En attente d'approbation  
 **Date de création :** 2026-06-20  
-**Heure :** 20:18:16  
+**Heure :** 20:19:29  
 **Catégorie :** Croisière  
-**Sujet :** Joute nautique轻柔 : duel amical entre deux supports
+**Sujet :** Relais en flotte : course par équipes sur catamaran
 
 ---
 
@@ -28,7 +28,7 @@ Cette fiche met en avant une activité **fun et agréable** à pratiquer avec le
 
 ---
 
-## 🔎 Recherche préliminaire\n\n*Knowledge base local absent ou vide. Recherche en ligne recommandée.*\n
+## 🔎 Recherche préliminaire\n\n> ### E. Le relais en flotte\n\n*Extrait du knowledge base local (/Users/armandfardeau/WWW/session_handouts/research_base.md). À approfondir si nécessaire.*\n
 
 ---
 
