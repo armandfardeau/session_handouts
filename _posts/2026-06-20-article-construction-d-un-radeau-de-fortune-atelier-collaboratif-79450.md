@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Activité fun et conviviale — Bain de mer encadré : pause rafraîchissante en sécurité"
+title:  "Activité fun et conviviale — Construction d'un radeau de fortune : atelier collaboratif"
 author: armand
 categories: [ Croisière ]
 image: https://images.unsplash.com/photo-1500627964684-141351970a7f?w=800&q=80
@@ -11,9 +11,9 @@ tags: [ Croisière, fun-activity, recherche ]
 
 **Status :** 🔴 En attente d'approbation  
 **Date de création :** 2026-06-20  
-**Heure :** 20:17:23  
+**Heure :** 20:17:30  
 **Catégorie :** Croisière  
-**Sujet :** Bain de mer encadré : pause rafraîchissante en sécurité
+**Sujet :** Construction d'un radeau de fortune : atelier collaboratif
 
 ---
 
@@ -28,7 +28,7 @@ Cette fiche met en avant une activité **fun et agréable** à pratiquer avec le
 
 ---
 
-## 🔎 Recherche préliminaire\n\n> ### N. Le bain de mer encadré\n\n*Extrait du knowledge base local (/Users/armandfardeau/WWW/session_handouts/research_base.md). À approfondir si nécessaire.*\n
+## 🔎 Recherche préliminaire\n\n*Knowledge base local absent ou vide. Recherche en ligne recommandée.*\n
 
 ---
 
