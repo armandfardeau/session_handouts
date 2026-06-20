@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Activité fun et conviviale — Relais en flotte : course par équipes sur catamaran"
+title:  "Activité fun et conviviale — Tour de l'île en escadre : navigation côtière conviviale"
 author: armand
 categories: [ Unapproved, Croisière ]
 image: https://images.unsplash.com/photo-1500627964684-141351970a7f?w=800&q=80
@@ -11,9 +11,9 @@ tags: [ Croisière, fun-activity, recherche ]
 
 **Status :** 🔴 En attente d'approbation  
 **Date de création :** 2026-06-20  
-**Heure :** 10:43:08  
+**Heure :** 20:09:55  
 **Catégorie :** Croisière  
-**Sujet :** Relais en flotte : course par équipes sur catamaran
+**Sujet :** Tour de l'île en escadre : navigation côtière conviviale
 
 ---
 
@@ -28,7 +28,7 @@ Cette fiche met en avant une activité **fun et agréable** à pratiquer avec le
 
 ---
 
-## 🔎 Recherche préliminaire\n\n> ### E. Le relais en flotte\n\n*Extrait du knowledge base local (/Users/armandfardeau/WWW/session_handouts/research_base.md). À approfondir si nécessaire.*\n
+## 🔎 Recherche préliminaire\n\n> - Départ / retour de quai ou coffre.\n\n*Extrait du knowledge base local (/Users/armandfardeau/WWW/session_handouts/research_base.md). À approfondir si nécessaire.*\n
 
 ---
 
