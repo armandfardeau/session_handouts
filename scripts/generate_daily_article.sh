@@ -90,7 +90,7 @@ cat > "$FILENAME" << EOF
 layout: post
 title:  "${TITLE}"
 author: armand
-categories: [ Unapproved, ${CATEGORY} ]
+categories: [ ${CATEGORY} ]
 image: https://images.unsplash.com/photo-1500627964684-141351970a7f?w=800&q=80
 tags: [ ${CATEGORY}, fun-activity, recherche ]
 ---
@@ -163,7 +163,7 @@ EOF
 echo ""
 echo "✓ Article created: $FILENAME"
 echo "  Title: $TITLE"
-echo "  Categories: [ Unapproved, $CATEGORY ]"
+echo "  Categories: [ $CATEGORY ]"
 echo "  Sujet: $TOPIC  (index $NEXT_INDEX / $NUM_TOPICS)"
 
 # ---------- Git commit & push ----------
