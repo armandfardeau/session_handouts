@@ -191,14 +191,15 @@ fi
 # Push only if upstream exists
 UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null || echo "")
 BRANCH=$(git branch --show-current 2>/dev/null || echo "")
+REMOTE=$(git remote 2>/dev/null | head -n1 || echo "")
 
-if [[ -n "$UPSTREAM" && -n "$BRANCH" ]]; then
-  echo "👉 git push origin $BRANCH..."
-  if git push origin "$BRANCH"; then
+if [[ -n "$UPSTREAM" && -n "$BRANCH" && -n "$REMOTE" ]]; then
+  echo "👉 git push $REMOTE $BRANCH..."
+  if git push "$REMOTE" "$BRANCH"; then
     echo "✓ Pushed to $UPSTREAM"
   else
     echo "✗ Push failed — commit is local only."
   fi
 else
-  echo "ℹ No upstream configured — commit is local only."
+  echo "ℹ No upstream or remote configured — commit is local only."
 fi
