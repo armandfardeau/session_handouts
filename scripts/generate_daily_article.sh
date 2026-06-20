@@ -166,40 +166,133 @@ echo "  Title: $TITLE"
 echo "  Categories: [ Unapproved, $CATEGORY ]"
 echo "  Sujet: $TOPIC  (index $NEXT_INDEX / $NUM_TOPICS)"
 
-# ---------- Git commit & push ----------
+# ---------- Git: feature branch + push + PR ----------
 cd "$BLOG_DIR"
 
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
-  echo "⚠ Not a git repo — skipping commit/push."
+  echo "⚠ Not a git repo — skipping git workflow."
   exit 0
 fi
 
+# Ensure we're on main and it's up to date
+MAIN_BRANCH="main"
+CURRENT_BRANCH=$(git branch --show-current 2>/dev/null || echo "")
+
+# Save & restore current branch
+ORIGINAL_BRANCH="$CURRENT_BRANCH"
+echo "🌿 Current branch: $CURRENT_BRANCH"
+
+# Stash any working tree changes if needed (defensive)
+STASH_NEEDED=0
+if ! git diff --quiet || ! git diff --cached --quiet; then
+  STASH_NEEDED=1
+  echo "📥 Stashing existing changes..."
+  git stash push -u -m "auto-gen-daily-article stash $(date +%s)" >/dev/null 2>&1 || STASH_NEEDED=0
+fi
+
+# Make sure we're on main and up to date
+git checkout "$MAIN_BRANCH" 2>/dev/null || {
+  echo "⚠ Cannot checkout $MAIN_BRANCH — falling back to direct commit."
+  if [[ $STASH_NEEDED -eq 1 ]]; then git stash pop >/dev/null 2>&1 || true; fi
+  exit 0
+}
+
+REMOTE=$(git remote 2>/dev/null | head -n1 || echo "")
+if [[ -z "$REMOTE" ]]; then
+  echo "⚠ No git remote configured."
+  git checkout "$ORIGINAL_BRANCH" >/dev/null 2>&1 || true
+  [[ $STASH_NEEDED -eq 1 ]] && git stash pop >/dev/null 2>&1 || true
+  exit 0
+fi
+
+git pull --rebase "$REMOTE" "$MAIN_BRANCH" 2>/dev/null || true
+
+# Create a feature branch
+BRANCH_NAME="auto/daily-article-${TODAY}-$(echo "$SLUG_TOPIC" | cut -c1-30)"
+echo "🌿 Creating branch: $BRANCH_NAME"
+git checkout -b "$BRANCH_NAME" 2>/dev/null || git checkout "$BRANCH_NAME"
+
+# Pop the stash on the new branch if we stashed
+if [[ $STASH_NEEDED -eq 1 ]]; then
+  git stash pop >/dev/null 2>&1 || true
+fi
+
+# Add & commit
 COMMIT_MSG="auto: daily article [${TODAY}] ${SLUG_TOPIC}"
-echo ""
+git config user.name "${GIT_AUTHOR_NAME:-Armand Fardeau}" 2>/dev/null || true
+git config user.email "${GIT_AUTHOR_EMAIL:-armand@fardeau.com}" 2>/dev/null || true
+
 echo "📦 git add..."
 git add -A
 
 if git diff --cached --quiet; then
   echo "ℹ Nothing to commit."
-else
-  git config user.name "${GIT_AUTHOR_NAME:-Armand Fardeau}" 2>/dev/null || true
-  git config user.email "${GIT_AUTHOR_EMAIL:-armand@fardeau.com}" 2>/dev/null || true
-  echo "✏️ git commit..."
-  git commit -m "$COMMIT_MSG"
+  git checkout "$MAIN_BRANCH" >/dev/null 2>&1
+  git branch -d "$BRANCH_NAME" 2>/dev/null || true
+  git checkout "$ORIGINAL_BRANCH" >/dev/null 2>&1 || true
+  exit 0
 fi
 
-# Push only if upstream exists
-UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null || echo "")
-BRANCH=$(git branch --show-current 2>/dev/null || echo "")
-REMOTE=$(git remote 2>/dev/null | head -n1 || echo "")
+echo "✏️ git commit..."
+git commit -m "$COMMIT_MSG"
 
-if [[ -n "$UPSTREAM" && -n "$BRANCH" && -n "$REMOTE" ]]; then
-  echo "👉 git push $REMOTE $BRANCH..."
-  if git push "$REMOTE" "$BRANCH"; then
-    echo "✓ Pushed to $UPSTREAM"
+# Push the branch
+echo "👉 git push $REMOTE $BRANCH_NAME..."
+if ! git push "$REMOTE" "$BRANCH_NAME" 2>&1; then
+  echo "✗ Push failed — branch kept local."
+  exit 1
+fi
+
+echo "✓ Branch pushed: $REMOTE/$BRANCH_NAME"
+
+# ---------- Open Pull Request via gh CLI ----------
+PR_URL=""
+if command -v gh >/dev/null 2>&1; then
+  echo "🔀 Creating Pull Request..."
+  PR_BODY=$(cat << EOF
+## 🌅 Article quotidien (en attente d'approbation)
+
+**Date :** ${TODAY}
+**Sujet :** ${TOPIC}
+**Catégorie :** ${CATEGORY}
+
+### 📝 Changements
+
+- Article Jekyll ajouté dans \`_posts/\`
+- Catégorie \`Unapproved\` appliquée
+- Activité pédagogique **fun et conviviale**
+
+### ✅ À vérifier avant merge
+
+- [ ] Cohérence pédagogique
+- [ ] Sécurité (gilets, conditions, encadrement)
+- [ ] Sources et inspirations
+- [ ] Retrait de la catégorie \`Unapproved\` si validé
+
+---
+*Généré automatiquement par le cron OpenClaw.*
+EOF
+)
+
+  if PR_URL=$(gh pr create \
+      --base "$MAIN_BRANCH" \
+      --head "$BRANCH_NAME" \
+      --title "📝 Auto: Daily article [${TODAY}] ${SLUG_TOPIC}" \
+      --body "$PR_BODY" \
+      --label "auto-generated,unapproved" \
+      2>&1); then
+    echo "✓ PR created: $PR_URL"
   else
-    echo "✗ Push failed — commit is local only."
+    echo "⚠ Could not create PR via gh CLI."
+    echo "$PR_URL"
   fi
 else
-  echo "ℹ No upstream or remote configured — commit is local only."
+  echo "ℹ gh CLI not installed — branch pushed, PR must be created manually:"
+  echo "   https://github.com/$(git config --get remote.$REMOTE.url | sed -E 's|.*github.com[:/]([^/]+)/([^.]+)(\.git)?|\1/\2|')/compare/${MAIN_BRANCH}...${BRANCH_NAME}"
 fi
+
+# Return to original branch
+git checkout "$ORIGINAL_BRANCH" >/dev/null 2>&1 || git checkout "$MAIN_BRANCH"
+echo ""
+echo "↩️ Returned to branch: $(git branch --show-current)"
+
