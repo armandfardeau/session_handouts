@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Activité fun et conviviale — Construction d'un radeau de fortune : atelier collaboratif"
+title:  "Activité fun et conviviale — Joute nautique轻柔 : duel amical entre deux supports"
 author: armand
 categories: [ Croisière ]
 image: https://images.unsplash.com/photo-1500627964684-141351970a7f?w=800&q=80
@@ -11,9 +11,9 @@ tags: [ Croisière, fun-activity, recherche ]
 
 **Status :** 🔴 En attente d'approbation  
 **Date de création :** 2026-06-20  
-**Heure :** 20:17:35  
+**Heure :** 20:18:16  
 **Catégorie :** Croisière  
-**Sujet :** Construction d'un radeau de fortune : atelier collaboratif
+**Sujet :** Joute nautique轻柔 : duel amical entre deux supports
 
 ---
 
