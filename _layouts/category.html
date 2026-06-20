@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Breadcrumb -->
+            <p class="text-uppercase font-weight-bold small mb-3">
+                <a class="text-danger" href="{{ site.baseurl }}/categories.html">Categories</a>
+                <span class="text-muted"> / </span>
+                <span class="text-muted">{{ page.category }}</span>
+            </p>
+
+            <h1 class="font-weight-bold title h2 text-uppercase mb-2">
+                {{ page.category }}
+            </h1>
+
+            {% assign category_posts = site.posts | where_exp: "post", "post.categories contains page.category" %}
+            <p class="text-muted mb-4">
+                {{ category_posts | size }} post{% if category_posts.size != 1 %}s{% endif %}
+                in this category.
+            </p>
+
+            {% if category_posts.size > 0 %}
+                {% for post in category_posts %}
+                    {% include main-loop-card.html %}
+                {% endfor %}
+            {% else %}
+                <p>No posts found in this category.</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-4">
+            {% include sidebar-featured.html %}
+        </div>
+    </div>
+</div>

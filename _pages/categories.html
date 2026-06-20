@@ -7,30 +7,35 @@ permalink: "/categories.html"
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-        <h1 class="font-weight-bold title h6 text-uppercase mb-4">Categories</h1>
-            
-        {% for category in site.categories %} 
-        <h4 class="font-weight-bold spanborder text-capitalize" id="{{ category[0] | downcase }}"><span>{{ category[0] }}</span></h4>
-            
-        {% assign pages_list = category[1] %}
-        {% for post in pages_list %}
-        {% if post.title != null %}
-          {% if group == null or group == post.group %}
-         
-            {% include main-loop-card.html %}
-          {% endif %}
-        {% endif %}
-        {% endfor %}
-        {% assign pages_list = nil %}
-        {% assign group = nil %}
+            <h1 class="font-weight-bold title h6 text-uppercase mb-4">Categories</h1>
 
-        {% endfor %}
+            {% comment %}
+                site.categories is a hash keyed by unique category name, so iteration is naturally deduplicated.
+            {% endcomment %}
+            <div class="row">
+            {% for category in site.categories %}
+                {% assign cat_name = category[0] %}
+                {% assign cat_count = category[1] | size %}
+                {% assign cat_slug = cat_name | downcase | replace: ' ', '-' %}
+                <div class="col-md-6 mb-4">
+                    <a class="text-dark" href="{{ site.baseurl }}/category/{{ cat_slug }}/">
+                        <div class="border rounded p-4 h-100">
+                            <h4 class="font-weight-bold text-capitalize mb-2">
+                                {{ cat_name }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ cat_count }} post{% if cat_count != 1 %}s{% endif %}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
 
         </div>
-        
-            <div class="col-md-4">
-        {% include sidebar-featured.html %}    
-    </div>
-        
+
+        <div class="col-md-4">
+            {% include sidebar-featured.html %}
+        </div>
     </div>
 </div>
