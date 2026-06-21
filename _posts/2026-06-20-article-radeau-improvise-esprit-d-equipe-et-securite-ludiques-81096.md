@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Activite fun et conviviale - Carrousel a plusieurs bateaux : manoeuvres en musique"
+title:  "Activite fun et conviviale - Radeau improvise : esprit d'equipe et securite ludiques"
 author: armand
 categories: [ Croisière ]
 image: https://images.unsplash.com/photo-1500627964684-141351970a7f?w=800&q=80
@@ -11,9 +11,9 @@ tags: [ Croisière, fun-activity, recherche ]
 
 **Status :** 🔵 En revision (PR ouverte)
 **Date de creation :** 2026-06-20
-**Heure :** 20:23:09
+**Heure :** 20:44:56
 **Categorie :** Croisière
-**Sujet :** Carrousel a plusieurs bateaux : manoeuvres en musique
+**Sujet :** Radeau improvise : esprit d'equipe et securite ludiques
 
 ---
 
